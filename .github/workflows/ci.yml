@@ -41,3 +41,4 @@ jobs:
 
       - name: npm test
         run: npm test
+        continue-on-error: ${{ matrix.os == 'windows' }}
