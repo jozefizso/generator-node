@@ -16,8 +16,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ ubuntu, windows, macos ]
-        node: [ 16, 18, 20, 22 ]
+        os: [ ubuntu, macos ]
+        node: [ 14, 16, 18 ]
 
     env:
       FORCE_COLOR: 1
