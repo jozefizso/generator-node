@@ -1,0 +1,40 @@
+name: ci
+
+permissions:
+  contents: read
+  checks: write
+
+on:
+  push:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: '${{ matrix.os }}-latest'
+
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ ubuntu, windows, macos ]
+        node: [ 16, 18, 20, 22 ]
+
+    env:
+      FORCE_COLOR: 1
+
+    name: Node ${{ matrix.node }} on ${{ matrix.os }}
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+
+      - name: setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: npm ci
+        run: npm ci
+
+      - name: npm test
+        run: npm test
